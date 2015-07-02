@@ -137,28 +137,22 @@ public final class Geldbetrag
 	
 	//Hilfsmethoden
 	
-	/**
-	 * Liefert den im Objekt gehaltenen Wert in Eurocent
-	 * @return Gehaltener Wert in Eurocent
-	 */
+	// Liefert den im Objekt gehaltenen Wert in Eurocent
+	// @return Gehaltener Wert in Eurocent
 	private int getEurocent()
 	{
 		return _eurocent;
 	}
 	
-	/**
-	 * Liefert die VOLLEN Euro, die im Wert enthalten sind OHNE Cent. Bsp: 8,31€ liefert 8.
-	 * @return Ganze Euro, die im Objekt gehalten werden
-	 */
+	// Liefert die VOLLEN Euro, die im Wert enthalten sind OHNE Cent. Bsp: 8,31€ liefert 8.
+	// @return Ganze Euro, die im Objekt gehalten werden
 	private int getEuro()
 	{
 		return _eurocent / 100;
 	}
 	
-	/**
-	 * Liefert die Cent ohne Euro, die im Wert enthalten sind. Bsp: 8,31€ liefert 31
-	 * @return Cent zum nächsten vollen Euro
-	 */
+	// Liefert die Cent ohne Euro, die im Wert enthalten sind. Bsp: 8,31€ liefert 31
+	//  @return Cent zum nächsten vollen Euro
 	private int getCent()
 	{
 		return _eurocent % 100;
@@ -166,12 +160,12 @@ public final class Geldbetrag
 	
 	//fachwerte override
 	
-	@Override
 	/**
 	 * Prüft, ob ein Objekt dem aufrufenden Geldbetrag gleicht.
 	 * 
 	 * @return Ergebnis der Prüfung auf Gleichheit. Gleichheit wird durch true repräsentiert.
 	 */
+	@Override
 	public boolean equals(Object O)
 	{
 		//TODO Implementieren
