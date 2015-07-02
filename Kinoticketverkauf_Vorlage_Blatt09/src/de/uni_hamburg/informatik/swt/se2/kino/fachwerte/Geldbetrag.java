@@ -168,12 +168,9 @@ public final class Geldbetrag
 	@Override
 	public boolean equals(Object O)
 	{
-		if(O instanceof Geldbetrag)
+		if((O instanceof Geldbetrag) && (hashCode()==O.hashCode()))
 		{
-			if(hashCode()==O.hashCode())
-			{
-				return true;
-			}
+			return true;
 		}	
 		return false;
 	}
