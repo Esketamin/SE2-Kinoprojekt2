@@ -168,19 +168,24 @@ public final class Geldbetrag
 	@Override
 	public boolean equals(Object O)
 	{
-		//TODO Implementieren
 		if(O instanceof Geldbetrag)
 		{
-			
-		}
-		
+			if(hashCode()==O.hashCode())
+			{
+				return true;
+			}
+		}	
 		return false;
 	}
 	
+	/**
+	 * Erstellt einen hashCode der gleich ist für gleich Geldbetragobjekte.
+	 * 
+	 * @return int hashcode ist hier _eurocent.
+	 */
 	@Override
 	public int hashCode()
 	{
-		//TODO Implementieren
-		return 1;
+		return _eurocent;
 	}
 }
