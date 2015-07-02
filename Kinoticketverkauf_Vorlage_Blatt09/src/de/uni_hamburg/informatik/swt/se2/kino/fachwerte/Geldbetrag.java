@@ -119,22 +119,7 @@ public final class Geldbetrag
 		//TODO Klären, ob negative Multiplikatoren zugelassen werden sollen
 		return get(n * _eurocent);
 	}
-	
-	@Override
-	/**
-	 * Liefert einen String, der den Wert des Geldbetrages in formatierter Form enthält. Der String hat die Form
-	 * "E(EE...),CC".
-	 * 
-	 * @ensure result.matches("-? *\\d+ *, *\\d\\d")
-	 * @ensure result != null
-	 * 
-	 * @return String, der den Wert des Geldbetrages repräsentiert
-	 */
-	public String toString()
-	{
-		return (new StringBuilder(getEuro()+(","+getCent()).replaceAll("-", ""))).toString();
-	}
-	
+		
 	//Hilfsmethoden
 	
 	// Liefert den im Objekt gehaltenen Wert in Eurocent
@@ -159,6 +144,21 @@ public final class Geldbetrag
 	}
 	
 	//fachwerte override
+	
+	/**
+	 * Liefert einen String, der den Wert des Geldbetrages in formatierter Form enthält. Der String hat die Form
+	 * "E(EE...),CC".
+	 * 
+	 * @ensure result.matches("-? *\\d+ *, *\\d\\d")
+	 * @ensure result != null
+	 * 
+	 * @return String, der den Wert des Geldbetrages repräsentiert
+	 */
+	@Override
+	public String toString()
+	{
+		return (new StringBuilder(getEuro()+(","+getCent()).replaceAll("-", ""))).toString();
+	}
 	
 	/**
 	 * Prüft, ob ein Objekt dem aufrufenden Geldbetrag gleicht.
