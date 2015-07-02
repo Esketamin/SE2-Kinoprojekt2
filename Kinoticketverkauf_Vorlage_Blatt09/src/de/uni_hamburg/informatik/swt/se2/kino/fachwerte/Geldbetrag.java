@@ -42,7 +42,7 @@ public final class Geldbetrag
 	 * in der Form "EE,CC"
 	 * 
 	 * @require betrag != null
-	 * @require betrag.matches("[-]?\\d+,\\d\\d")
+	 * @require betrag.matches("-? *\\d+ *, *\\d\\d")
 	 * 
 	 * @ensure result != null
 	 * 
@@ -51,12 +51,12 @@ public final class Geldbetrag
 	public static Geldbetrag get(String betrag)
 	{
 		assert betrag != null : "Vorbedingung verletzt: betrag != null";
-		assert betrag.matches("[-]?\\d+,\\d\\d") : "Vorbedingung verletzt: betrag.matches(\"[-]?\\d+,\\d\\d\")";
+		assert betrag.matches("-? *\\d+ *, *\\d\\d") : "Vorbedingung verletzt: betrag.matches(\"-? *\\d+ *, *\\d\\d\")";
 		
 		int intBetrag = 0;
 		//TODO Implementieren
 		//TODO klären, ob in der Eingabe Leerzeichen erlaubt werden
-		if(betrag.matches("[-]?\\d+,\\d\\d"))
+		if(betrag.matches("-? *\\d+ *, *\\d\\d"))
 		{
 			
 		}
@@ -83,7 +83,7 @@ public final class Geldbetrag
 	{
 		assert betrag != null : "Vorbedingung verletzt: betrag != null";
 		
-		return get(_eurocent+betrag.getEurocent());
+		return get(_eurocent + betrag.getEurocent());
 	}
 	
 	/**
@@ -101,7 +101,7 @@ public final class Geldbetrag
 	{
 		assert betrag != null : "Vorbedingung verletzt: betrag != null";
 		
-		return get(_eurocent-betrag.getEurocent());
+		return get(_eurocent - betrag.getEurocent());
 	}
 
 	/**
@@ -125,14 +125,14 @@ public final class Geldbetrag
 	 * Liefert einen String, der den Wert des Geldbetrages in formatierter Form enthält. Der String hat die Form
 	 * "E(EE...),CC".
 	 * 
-	 * @ensure result.matches("[-]?\\d+,\\d\\d")
+	 * @ensure result.matches("-? *\\d+ *, *\\d\\d")
 	 * @ensure result != null
 	 * 
 	 * @return String, der den Wert des Geldbetrages repräsentiert
 	 */
 	public String toString()
 	{
-		return (new StringBuilder(getEuro()+','+getCent())).toString();
+		return (new StringBuilder(getEuro()+(","+getCent()).replaceAll("-", ""))).toString();
 	}
 	
 	//Hilfsmethoden
