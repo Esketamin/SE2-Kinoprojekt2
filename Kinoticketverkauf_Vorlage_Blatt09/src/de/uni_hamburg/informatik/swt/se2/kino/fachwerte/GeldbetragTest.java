@@ -13,29 +13,29 @@ public class GeldbetragTest
     }
     
     @Test
-    public void testConstructionFromString()
+    public void testConstructionFromString() throws InvalidInputException
     {
         assertEquals("1,00",Geldbetrag.get("1,00").toString());
     }  
     
     @Test
-    public void testGibString()
+    public void testToString() throws InvalidInputException
     {
-        Geldbetrag geldbetrag = Geldbetrag.get(1000);
-        assertEquals("10,00",geldbetrag.toString());
+        Geldbetrag geldbetrag = Geldbetrag.get("    - 10,  0 0");
+        assertEquals("-10,00",geldbetrag.toString());
     }
     
     @Test
-    public void testAddieren()
+    public void testAddieren() throws InvalidInputException
     {
         Geldbetrag betrag1 = Geldbetrag.get(1337);
-        Geldbetrag betrag2 = Geldbetrag.get("13,37");
+        Geldbetrag betrag2 = Geldbetrag.get(" 13 ,  37");
         
         assertEquals("26,74",betrag1.addiere(betrag2).toString());
     }
     
     @Test
-    public void testSubtrahieren()
+    public void testSubtrahieren() throws InvalidInputException
     {
         Geldbetrag betrag1 = Geldbetrag.get(1337);
         Geldbetrag betrag2 = Geldbetrag.get("13,37");

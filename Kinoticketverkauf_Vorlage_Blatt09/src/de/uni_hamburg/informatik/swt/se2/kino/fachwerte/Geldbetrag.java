@@ -48,23 +48,19 @@ public final class Geldbetrag
 	 * 
 	 * @return Das fertige Geldbetrag-Objekt
 	 */
-	public static Geldbetrag get(String betrag)
+	public static Geldbetrag get(String betrag) throws InvalidInputException
 	{
 		assert betrag != null : "Vorbedingung verletzt: betrag != null";
-		assert betrag.matches("-? *\\d+ *, *\\d\\d") : "Vorbedingung verletzt: betrag.matches(\"-? *\\d+ *, *\\d\\d\")";
+		assert betrag.matches(" *-? *\\d+ *, *\\d *\\d *") : "Vorbedingung verletzt: betrag.matches(\" *-? *\\d+ *, *\\d *\\d *\")";
 		
-		int intBetrag = 0;
-		//TODO Implementieren
-		//TODO klären, ob in der Eingabe Leerzeichen erlaubt werden
-		if(betrag.matches("-? *\\d+ *, *\\d\\d"))
+		if(betrag.matches(" *-? *\\d+ *, *\\d *\\d *"))
 		{
-			
+			return new Geldbetrag(Integer.parseInt(betrag.replaceAll("[, ]", "")));
 		}
-//		else
-//		{
-//			
-//		}
-		return new Geldbetrag(intBetrag);
+		else
+		{
+			throw new InvalidInputException();
+		}
 	}
 
 	
@@ -116,7 +112,6 @@ public final class Geldbetrag
 	 */
 	public Geldbetrag multipliziere(int n)
 	{
-		//TODO Klären, ob negative Multiplikatoren zugelassen werden sollen
 		return get(n * _eurocent);
 	}
 		
@@ -157,7 +152,14 @@ public final class Geldbetrag
 	@Override
 	public String toString()
 	{
-		return (new StringBuilder(getEuro()+(","+getCent()).replaceAll("-", ""))).toString();
+		if(Math.abs(getCent())<10)
+		{
+			return (new StringBuilder(getEuro()+(",0"+getCent()).replaceAll("-", ""))).toString();
+		}
+		else
+		{
+			return (new StringBuilder(getEuro()+(","+getCent()).replaceAll("-", ""))).toString();
+		}
 	}
 	
 	/**
