@@ -57,4 +57,15 @@ public class GeldbetragTest
     	Geldbetrag betrag = Geldbetrag.get(-1337);
     	assertEquals("-13,37",betrag.toString());
     }
+    
+    @Test
+    public void testCompareTo()
+    {
+    	Geldbetrag klein = Geldbetrag.get(-1337);
+    	Geldbetrag gross = Geldbetrag.get(1337);
+    	
+    	assertTrue(klein.compareTo(klein) == 0);   	
+    	assertTrue(klein.compareTo(gross) == -1);
+    	assertTrue(gross.compareTo(klein) == 1);
+    }
 }

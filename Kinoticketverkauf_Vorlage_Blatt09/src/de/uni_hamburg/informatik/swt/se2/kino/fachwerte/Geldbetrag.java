@@ -7,11 +7,11 @@ package de.uni_hamburg.informatik.swt.se2.kino.fachwerte;
  * Sie tragen einen Betrag in Eurocent und bieten Methoden zum Rechnen und lassen eine Repräsentation des Betrages als
  * String ausgeben.
  * 
- * @author stefan
- * @version 1.0
- * @date 02.07.2015
+ * @author D,C,M,S
+ * @version 1.drölf
+ * @date 03.07.2015
  */
-public final class Geldbetrag
+public final class Geldbetrag implements Comparable<Geldbetrag>
 {
 	private final int _eurocent;
 	
@@ -51,16 +51,33 @@ public final class Geldbetrag
 	public static Geldbetrag get(String betrag) throws InvalidInputException
 	{
 		assert betrag != null : "Vorbedingung verletzt: betrag != null";
-		assert betrag.matches(" *-? *\\d+ *, *\\d *\\d *") : "Vorbedingung verletzt: betrag.matches(\" *-? *\\d+ *, *\\d *\\d *\")";
 		
-		if(betrag.matches(" *-? *\\d+ *, *\\d *\\d *"))
+		int betragAlsInt = 0;
+		
+		if(betrag.matches(" *-?\\d+,\\d\\d *"))
 		{
-			return new Geldbetrag(Integer.parseInt(betrag.replaceAll("[, ]", "")));
+			try {
+				betragAlsInt  = Integer.parseInt(betrag.replaceAll("[, ]", ""));
+			} catch (NumberFormatException e) {
+				throw new InvalidInputException();
+			}
 		}
+//		Ich fände es gut, wenn man kein Komma machen muss. +1 vote von DJM
+//		Ihr könnt hier ja mal voten :D
+//		else if(betrag.matches(" *-?\\d+ *"))
+//		{
+//			try {
+//				betragAlsInt  = 100*Integer.parseInt(betrag.replaceAll(" ", ""));
+//			} catch (NumberFormatException e) {
+//				throw new InvalidInputException();
+//			}
+//		}
 		else
 		{
 			throw new InvalidInputException();
 		}
+		
+		return new Geldbetrag(betragAlsInt);
 	}
 
 	
@@ -114,16 +131,16 @@ public final class Geldbetrag
 	{
 		return get(n * _eurocent);
 	}
-		
+	
 	//Hilfsmethoden
 	
 	// Liefert den im Objekt gehaltenen Wert in Eurocent
-	// @return Gehaltener Wert in Eurocent
+	// @return Geldbetrag, in Eurocent, als int.
 	private int getEurocent()
 	{
 		return _eurocent;
 	}
-	
+		
 	// Liefert die VOLLEN Euro, die im Wert enthalten sind OHNE Cent. Bsp: 8,31€ liefert 8.
 	// @return Ganze Euro, die im Objekt gehalten werden
 	private int getEuro()
@@ -186,5 +203,24 @@ public final class Geldbetrag
 	public int hashCode()
 	{
 		return _eurocent;
+	}
+
+	/**
+	 * Implementiert this.compareTo(anderes) für Geldbetrag
+	 * 
+	 * @return -1 wenn this < anderes, 0 wenn this == anderes und 1 wenn this > anders
+	 */
+	@Override
+	public int compareTo(Geldbetrag betrag)
+	{
+		if(hashCode()<betrag.hashCode())
+		{
+			return -1;
+		}
+		else if(hashCode()==betrag.hashCode())
+		{
+			return 0;
+		}
+		return 1;
 	}
 }
